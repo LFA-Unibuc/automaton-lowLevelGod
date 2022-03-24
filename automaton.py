@@ -7,34 +7,61 @@ class Automaton():
         self.config_file = config_file
         file = open(self.config_file)
         d = {}
-        current_set = ""
+        current_set = None
         for line in file.readlines():
-            line = line.rstrip().strip()
-            if '#' not in line:
-                if ':' in line:
-                    line = line.split(":", maxsplit=1)[0].rstrip()
-                    d[line] = []
-                    current_set = line
-                else:
-                    if line != "End":
-                        tple = []
-                        for x in line.split(","):
-                            tple.append(x.rstrip().strip())
-                        tple = tuple(tple)
-                        d[current_set].append(tple)
+            line = line.strip().rstrip()
+            if line.startswith("#") == False:
+                if line.lower() != "End".lower():
+                    if ':' in line:
+                        current_set = line.split(":")[0].rstrip()
+                        if current_set == 'Transitions':
+                            d[current_set] = {}
+                        else:
+                            d[current_set] = []
+                    else:
+                        line = tuple([x.strip().rstrip() for x in line.split(",")])
+                        if current_set == 'Transitions':
+                            if line[0] in d[current_set]:
+                                if line[1] in d[current_set][line[0]]:
+                                    if line[2] not in d[current_set][line[0]][line[1]]:
+                                        d[current_set][line[0]][line[1]].append(line[2])
+                                else:
+                                    d[current_set][line[0]][line[1]] = []
+                            else:
+                                d[current_set][line[0]] = {line[1] : [line[2], ]}
+                        else:
+                            d[current_set].append(line)
+        d['fstates'] = []
+        d['sstates'] = []
+        for state in d['States']:
+            for s in state[1:]:
+                if s == 'F':
+                    d["fstates"].append(state[0])
+                elif s == 'S':
+                    d["sstates"].append(state[0])
+        d['Sigma'] = [x[0] for x in d['Sigma']]
+        d['States'] = [x[0] for x in d['States']]
         file.close()
         self.data = d
+        print(d)
         print("Hi, I'm an automaton!")
 
     def validate(self):
         d = self.data
-        start_states = sum(1 for x in d["States"] if len(x) > 1 if x[1] == 'S')
-        if start_states > 1:
+        if len(d['sstates']) > 1:
             raise ValidationException("Only one starting state allowed !")
-        for t in d['Transitions']:
-            all_states = [x[0] for x in d['States']]
-            all_words = [x[0] for x in d['Sigma']]
-            if t[0] not in all_states or t[1] not in all_words or t[2] not in all_states:
+        for t in d['Transitions'].keys():
+            all_states = [x for x in d['States']]
+            all_words = [x for x in d['Sigma']]
+            lhs = t
+            mid = None
+            for x in d['Transitions'][t]:
+                mid = x
+            rhs = None
+            if mid != None:
+                for x in d['Transitions'][t][mid]:
+                    rhs = x
+            if lhs not in all_states or mid == None or rhs == None:
                 raise ValidationException("Invalid transition")
         return True
 

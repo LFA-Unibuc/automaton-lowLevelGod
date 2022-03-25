@@ -19,5 +19,5 @@ End
 #
 Transitions :
     state1, word1 , state1
-    state2, word2 , state3
+    state2, word1 , state4
 End

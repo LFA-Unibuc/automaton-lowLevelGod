@@ -43,7 +43,6 @@ class Automaton():
         d['States'] = [x[0] for x in d['States']]
         file.close()
         self.data = d
-        print(d)
         print("Hi, I'm an automaton!")
 
     def validate(self):
@@ -51,18 +50,15 @@ class Automaton():
         if len(d['sstates']) > 1:
             raise ValidationException("Only one starting state allowed !")
         for t in d['Transitions'].keys():
-            all_states = [x for x in d['States']]
-            all_words = [x for x in d['Sigma']]
-            lhs = t
-            mid = None
-            for x in d['Transitions'][t]:
-                mid = x
-            rhs = None
-            if mid != None:
-                for x in d['Transitions'][t][mid]:
-                    rhs = x
-            if lhs not in all_states or mid == None or rhs == None:
-                raise ValidationException("Invalid transition")
+            if t not in d['States']:
+                raise ValidationException("Invalid transition - > first state")
+            for w in d['Transitions'][t]:
+                if w not in d['Sigma']:
+                    raise ValidationException("Invalid transition - > word")
+                for t2 in d['Transitions'][t][w]:
+                    if t2 not in d['States']:
+                        raise ValidationException("Invalid transition - > second state")
+
         return True
 
     def accepts_input(self, input_str):
@@ -80,8 +76,4 @@ class Automaton():
         RejectionException.
         """
         pass
-    
-if __name__ == "__main__":
-    a = Automaton('input.txt')
-    print(a.validate())
 

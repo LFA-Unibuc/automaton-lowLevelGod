@@ -12,7 +12,8 @@ class Automaton():
             line = line.strip().rstrip()
             if line.startswith("#") == False:
                 if line.lower() != "End".lower():
-                    if ':' in line:
+                    if ':' in line and len(line.split()) > 1 and ',' not in line:
+                        #print(line)
                         current_set = line.split(":")[0].rstrip()
                         if current_set == 'Transitions':
                             d[current_set] = {}
@@ -21,12 +22,13 @@ class Automaton():
                     else:
                         line = tuple([x.strip().rstrip() for x in line.split(",")])
                         if current_set == 'Transitions':
+                            #print(line)
                             if line[0] in d[current_set]:
                                 if line[1] in d[current_set][line[0]]:
                                     if line[2] not in d[current_set][line[0]][line[1]]:
                                         d[current_set][line[0]][line[1]].append(line[2])
                                 else:
-                                    d[current_set][line[0]][line[1]] = []
+                                    d[current_set][line[0]][line[1]] = [line[2], ]
                             else:
                                 d[current_set][line[0]] = {line[1] : [line[2], ]}
                         else:
@@ -76,4 +78,7 @@ class Automaton():
         RejectionException.
         """
         pass
-
+'''
+nfa = Automaton('input.txt')
+print(nfa.data)
+'''

@@ -2,22 +2,50 @@
 # comment lines ( skip them )
 #
 Sigma :
-    word1
-    word2
+    0
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    :
 End
 #
 # comment lines ( skip them )
 #
 States :
-    state1
-    state2
-    state3 ,F
-    stateK , S
+    s, S
+    h1
+    h2
+    h
+    dots
+    m1
+    m2
 End
-#
 # comment lines ( skip them )
 #
 Transitions :
-    state1, word1 , state1
-    state2, word1 , state4
+    s, 0, h
+    s, 1 ,  h
+    s, 1, h1
+    h1, 1 ,  h
+    h1, 2 ,  h
+    h1, 3 ,  h
+    h1, 4 ,  h
+    h1, 5 ,  h
+    h1, 6 ,  h
+    h1, 7 ,  h
+    h1, 8 ,  h
+    h1, 9 ,  h
+    s, 2, h
+    s, 2, h2
+    h2, 0 , h
+    h2, 1 , h
+    h2, 2 , h
+    h2, 3 , h
+    h, :, dots
 End

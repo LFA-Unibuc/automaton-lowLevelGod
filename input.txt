@@ -28,7 +28,7 @@ States :
 	hha
 	t1
 	m1ma1
-	m2ma2, F
+	m2ma2, S, F
 	ma2
 	dots
 	dotsa

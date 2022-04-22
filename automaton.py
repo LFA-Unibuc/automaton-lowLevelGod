@@ -46,21 +46,29 @@ class Automaton():
         d['States'] = [x[0] for x in d['States']]
         file.close()
         self.data = d
-        print("Hi, I'm an automaton!")
+        if self.validate() == False:
+            print("invalid")
+            exit()
+        #print("Hi, I'm an automaton!")
 
     def validate(self):
         d = self.data
         if len(d['sstates']) > 1:
-            raise ValidationException("Only one starting state allowed !")
+            #raise ValidationException("Only one starting state allowed !")
+            return False
         for t in d['Transitions'].keys():
             if t not in d['States']:
-                raise ValidationException("Invalid transition - > first state")
+                #raise ValidationException("Invalid transition - > first state")
+                return False
             for w in d['Transitions'][t]:
                 if w not in d['Sigma']:
-                    raise ValidationException("Invalid transition - > word")
+                    #raise ValidationException("Invalid transition - > word")
+                    return False
                 for t2 in d['Transitions'][t][w]:
                     if t2 not in d['States']:
-                        raise ValidationException("Invalid transition - > second state")
+                        #print(t, w, t2)
+                        #raise ValidationException("Invalid transition - > second state")
+                        return False
 
         return True
 
@@ -80,6 +88,6 @@ class Automaton():
         """
         pass
 
-nfa = Automaton('input.txt')
-print(nfa.data)
+#nfa = Automaton('input.txt')
+#print(nfa.data)
 

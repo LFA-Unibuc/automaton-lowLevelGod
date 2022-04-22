@@ -1,6 +1,3 @@
-#
-# comment lines ( skip them )
-#
 Sigma :
     0
     1
@@ -13,39 +10,282 @@ Sigma :
     8
     9
     :
+    a
+    p
+    m
 End
-#
-# comment lines ( skip them )
-#
 States :
-    s, S
-    h1
-    h2
-    h
-    dots
-    m1
-    m2
+	ha1hhah1
+	dotsadots
+	h
+	None
+	t2, F
+	m2, F
+	ma1
+	ha
+	s, S
+	hhah2
+	hha
+	t1
+	m1ma1
+	m2ma2, F
+	ma2
+	dots
+	dotsa
+	m1
 End
-# comment lines ( skip them )
-#
+
 Transitions :
-    s, 0, h
-    s, 1 ,  h
-    s, 1, h1
-    h1, 1 ,  h
-    h1, 2 ,  h
-    h1, 3 ,  h
-    h1, 4 ,  h
-    h1, 5 ,  h
-    h1, 6 ,  h
-    h1, 7 ,  h
-    h1, 8 ,  h
-    h1, 9 ,  h
-    s, 2, h
-    s, 2, h2
-    h2, 0 , h
-    h2, 1 , h
-    h2, 2 , h
-    h2, 3 , h
-    h, :, dots
+	s, 0, h
+	s, 1, hh1ha1ha
+	s, 2, hh2ha
+	s, 3, hha
+	s, 4, hha
+	s, 5, hha
+	s, 6, hha
+	s, 7, hha
+	s, 8, hha
+	s, 9, hha
+	s, :, None
+	s, a, None
+	s, p, None
+	s, m, None
+	h, 0, None
+	h, 1, None
+	h, 2, None
+	h, 3, None
+	h, 4, None
+	h, 5, None
+	h, 6, None
+	h, 7, None
+	h, 8, None
+	h, 9, None
+	h, :, dots
+	h, a, None
+	h, p, None
+	h, m, None
+	hh1ha1ha, 0, ha
+	hh1ha1ha, 1, hha
+	hh1ha1ha, 2, hha
+	hh1ha1ha, 3, h
+	hh1ha1ha, 4, h
+	hh1ha1ha, 5, h
+	hh1ha1ha, 6, h
+	hh1ha1ha, 7, h
+	hh1ha1ha, 8, h
+	hh1ha1ha, 9, h
+	hh1ha1ha, :, dotsdotsa
+	hh1ha1ha, a, t1
+	hh1ha1ha, p, t1
+	hh1ha1ha, m, None
+	hh2ha, 0, h
+	hh2ha, 1, h
+	hh2ha, 2, h
+	hh2ha, 3, h
+	hh2ha, 4, None
+	hh2ha, 5, None
+	hh2ha, 6, None
+	hh2ha, 7, None
+	hh2ha, 8, None
+	hh2ha, 9, None
+	hh2ha, :, dotsdotsa
+	hh2ha, a, t1
+	hh2ha, p, t1
+	hh2ha, m, None
+	hha, 0, None
+	hha, 1, None
+	hha, 2, None
+	hha, 3, None
+	hha, 4, None
+	hha, 5, None
+	hha, 6, None
+	hha, 7, None
+	hha, 8, None
+	hha, 9, None
+	hha, :, dotsdotsa
+	hha, a, t1
+	hha, p, t1
+	hha, m, None
+	dots, 0, m1
+	dots, 1, m1
+	dots, 2, m1
+	dots, 3, m1
+	dots, 4, m1
+	dots, 5, m1
+	dots, 6, None
+	dots, 7, None
+	dots, 8, None
+	dots, 9, None
+	dots, :, None
+	dots, a, None
+	dots, p, None
+	dots, m, None
+	ha, 0, None
+	ha, 1, None
+	ha, 2, None
+	ha, 3, None
+	ha, 4, None
+	ha, 5, None
+	ha, 6, None
+	ha, 7, None
+	ha, 8, None
+	ha, 9, None
+	ha, :, dotsa
+	ha, a, t1
+	ha, p, t1
+	ha, m, None
+	dotsdotsa, 0, m1ma1
+	dotsdotsa, 1, m1ma1
+	dotsdotsa, 2, m1ma1
+	dotsdotsa, 3, m1ma1
+	dotsdotsa, 4, m1ma1
+	dotsdotsa, 5, m1ma1
+	dotsdotsa, 6, None
+	dotsdotsa, 7, None
+	dotsdotsa, 8, None
+	dotsdotsa, 9, None
+	dotsdotsa, :, None
+	dotsdotsa, a, None
+	dotsdotsa, p, None
+	dotsdotsa, m, None
+	t1, 0, None
+	t1, 1, None
+	t1, 2, None
+	t1, 3, None
+	t1, 4, None
+	t1, 5, None
+	t1, 6, None
+	t1, 7, None
+	t1, 8, None
+	t1, 9, None
+	t1, :, None
+	t1, a, None
+	t1, p, None
+	t1, m, t2
+	m1, 0, m2
+	m1, 1, m2
+	m1, 2, m2
+	m1, 3, m2
+	m1, 4, m2
+	m1, 5, m2
+	m1, 6, m2
+	m1, 7, m2
+	m1, 8, m2
+	m1, 9, m2
+	m1, :, None
+	m1, a, None
+	m1, p, None
+	m1, m, None
+	dotsa, 0, ma1
+	dotsa, 1, ma1
+	dotsa, 2, ma1
+	dotsa, 3, ma1
+	dotsa, 4, ma1
+	dotsa, 5, ma1
+	dotsa, 6, None
+	dotsa, 7, None
+	dotsa, 8, None
+	dotsa, 9, None
+	dotsa, :, None
+	dotsa, a, None
+	dotsa, p, None
+	dotsa, m, None
+	m1ma1, 0, ma2m2
+	m1ma1, 1, ma2m2
+	m1ma1, 2, ma2m2
+	m1ma1, 3, ma2m2
+	m1ma1, 4, ma2m2
+	m1ma1, 5, ma2m2
+	m1ma1, 6, ma2m2
+	m1ma1, 7, ma2m2
+	m1ma1, 8, ma2m2
+	m1ma1, 9, ma2m2
+	m1ma1, :, None
+	m1ma1, a, None
+	m1ma1, p, None
+	m1ma1, m, None
+	t2, 0, None
+	t2, 1, None
+	t2, 2, None
+	t2, 3, None
+	t2, 4, None
+	t2, 5, None
+	t2, 6, None
+	t2, 7, None
+	t2, 8, None
+	t2, 9, None
+	t2, :, None
+	t2, a, None
+	t2, p, None
+	t2, m, None
+	m2, 0, None
+	m2, 1, None
+	m2, 2, None
+	m2, 3, None
+	m2, 4, None
+	m2, 5, None
+	m2, 6, None
+	m2, 7, None
+	m2, 8, None
+	m2, 9, None
+	m2, :, None
+	m2, a, None
+	m2, p, None
+	m2, m, None
+	ma1, 0, ma2
+	ma1, 1, ma2
+	ma1, 2, ma2
+	ma1, 3, ma2
+	ma1, 4, ma2
+	ma1, 5, ma2
+	ma1, 6, ma2
+	ma1, 7, ma2
+	ma1, 8, ma2
+	ma1, 9, ma2
+	ma1, :, None
+	ma1, a, None
+	ma1, p, None
+	ma1, m, None
+	ma2m2, 0, None
+	ma2m2, 1, None
+	ma2m2, 2, None
+	ma2m2, 3, None
+	ma2m2, 4, None
+	ma2m2, 5, None
+	ma2m2, 6, None
+	ma2m2, 7, None
+	ma2m2, 8, None
+	ma2m2, 9, None
+	ma2m2, :, None
+	ma2m2, a, t1
+	ma2m2, p, t1
+	ma2m2, m, None
+	ma2, 0, None
+	ma2, 1, None
+	ma2, 2, None
+	ma2, 3, None
+	ma2, 4, None
+	ma2, 5, None
+	ma2, 6, None
+	ma2, 7, None
+	ma2, 8, None
+	ma2, 9, None
+	ma2, :, None
+	ma2, a, t1
+	ma2, p, t1
+	ma2, m, None
+	None, 0, None
+	None, 1, None
+	None, 2, None
+	None, 3, None
+	None, 4, None
+	None, 5, None
+	None, 6, None
+	None, 7, None
+	None, 8, None
+	None, 9, None
+	None, :, None
+	None, a, None
+	None, p, None
+	None, m, None
 End
